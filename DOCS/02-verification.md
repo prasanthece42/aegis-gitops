@@ -14,7 +14,7 @@ Verified October 25, 2026 (America/Halifax).
 | Pod replacement | PASS: new pod identity with same image and healthy endpoint |
 | Namespace security | PASS: privileged Pod dry-run rejected by Restricted Pod Security |
 | STAGING/PROD deployment | NOT RUN: rendered only |
-| GitHub chart-validation run | PENDING: repository not yet published |
+| GitHub chart-validation run | NOT RUN: publication blocked pending exact-destination approval |
 
 The local image is a scanned native arm64 build, loaded into Kind and selected by its
 actual manifest digest using a gitignored local override. The tracked environment
@@ -28,3 +28,11 @@ and deployment receipt contain full evidence and commands.
 
 CI performs static Helm/Kubernetes-schema checks only. No deployment credentials,
 Argo CD resources, promotion workflow, or production installation has been added.
+
+## Publication blocker
+
+The Helm chart is fully implemented and committed locally. Automatic approval review
+rejected creating/pushing the private `prasanthece42/aegis-gitops` repository because
+the user has not explicitly approved that exact new destination. No GitOps remote
+was created or pushed. Local chart and Kind checks remain valid; GitHub chart CI
+requires that approval before publication.
