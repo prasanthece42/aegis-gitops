@@ -1,0 +1,57 @@
+{
+  "schema_version": 2,
+  "release_tag": "release-40350242733-1",
+  "verified_at": "2026-10-26T15:34:42.032983+00:00",
+  "image": "ghcr.io/prasanthece42/aegis-cicd@sha256:a18c6217b4dcc160a8358bec59d39db9fa9c117089e8f032d98a86058b0e63bd",
+  "source_repository": "prasanthece42/aegis-cicd",
+  "source_commit": "5623846fc2e4ad4a89c7797ec9a71f2b0b87aea2",
+  "workflow_run": "https://github.com/prasanthece42/aegis-cicd/actions/runs/40350242733",
+  "run_id": 40350242733,
+  "run_attempt": 1,
+  "platforms": {
+    "linux/amd64": {
+      "schema_version": 1,
+      "verified_at": "2026-10-26T15:33:55.924666+00:00",
+      "image": "ghcr.io/prasanthece42/aegis-cicd@sha256:8f60a06fe3a4447f529686e9e56487851437d848101568f475dff10dfea76888",
+      "tag": "ghcr.io/prasanthece42/aegis-cicd:sha-5623846fc2e4ad4a89c7797ec9a71f2b0b87aea2-40350242733-1-amd64",
+      "image_config_digest": "sha256:f95d31b7ec3c6640e5e69d89e52cd6677891c4f2f6e2c94faa1237406e5a04b6",
+      "source_repository": "prasanthece42/aegis-cicd",
+      "source_commit": "5623846fc2e4ad4a89c7797ec9a71f2b0b87aea2",
+      "workflow_run": "https://github.com/prasanthece42/aegis-cicd/actions/runs/40350242733",
+      "run_attempt": "1",
+      "platform": "linux/amd64",
+      "scanner": "Trivy 0.76.1",
+      "policy": "Block every CRITICAL vulnerability, including unfixed findings",
+      "digest_pull_smoke_test": "passed",
+      "provenance": "Unsigned workflow evidence; not a signed attestation",
+      "evidence_sha256": {
+        "dependencies.json": "f81c525e58ef3b1e704defb50d13881fc847b17ab83f63580958a61ccee718b0",
+        "image.json": "6ec325d5d0ff6f86a338baea0326e60b1ed48d4ecf8e067841a654b412500b77",
+        "sbom.cdx.json": "38dab480824054ac29174d655320cc7a83dc31237b152f136349caff55e893d6"
+      }
+    },
+    "linux/arm64": {
+      "schema_version": 1,
+      "verified_at": "2026-10-26T15:34:06.499336+00:00",
+      "image": "ghcr.io/prasanthece42/aegis-cicd@sha256:1c3dc0ac9e3f9f53ca83142d2ca5c43c340e3c14ebc7c421904c5d244b480b8c",
+      "tag": "ghcr.io/prasanthece42/aegis-cicd:sha-5623846fc2e4ad4a89c7797ec9a71f2b0b87aea2-40350242733-1-arm64",
+      "image_config_digest": "sha256:98dec5c7ac474da7d0aa5bf322e5d06f34d0fa89899f44df48b14a6df110b6a7",
+      "source_repository": "prasanthece42/aegis-cicd",
+      "source_commit": "5623846fc2e4ad4a89c7797ec9a71f2b0b87aea2",
+      "workflow_run": "https://github.com/prasanthece42/aegis-cicd/actions/runs/40350242733",
+      "run_attempt": "1",
+      "platform": "linux/arm64",
+      "scanner": "Trivy 0.76.1",
+      "policy": "Block every CRITICAL vulnerability, including unfixed findings",
+      "digest_pull_smoke_test": "passed",
+      "provenance": "Unsigned workflow evidence; not a signed attestation",
+      "evidence_sha256": {
+        "dependencies.json": "f81c525e58ef3b1e704defb50d13881fc847b17ab83f63580958a61ccee718b0",
+        "image.json": "3a554b5ee8120de9c27519bcb70a1bbc1b1843a7c0dcf43446794aa7d235a547",
+        "sbom.cdx.json": "17e87eb1cf63d3f2e729deaa19ab3f89489c1f1e0a0c2d4fae6043120cf58ffb"
+      }
+    }
+  },
+  "bundle_sha256": "b5fb5f526b63295cda66260efdca9b462b45960092462564b7ec7d31e1a204af",
+  "provenance": "Unsigned workflow evidence; source and run verified through GitHub API"
+}
