@@ -3,9 +3,10 @@
 The deployment configuration repository for Aegis CI/CD. Application source and
 release workflows live separately in [aegis-cicd](https://github.com/prasanthece42/aegis-cicd).
 
-Current scope is Phase 4: Argo CD watches this private repository and reconciles
-local DEV using the chart and tracked native-image profile. Promotion approvals
-and automated cross-repository release updates remain later work.
+Current scope is Phase 5: public GitOps configuration with protected DEV, STAGING
+and PROD branches. DEV and STAGING run the same validated multi-platform image in
+local Kind. PROD PR #3 awaits human approval; PROD is not deployed.
+See [release management](DOCS/04-release-management.md).
 
 ```mermaid
 flowchart LR
@@ -29,12 +30,15 @@ charts/sample-api/
   templates/                 Deployment, Service, ServiceAccount, helpers, notes
 argocd/                      Application, project boundaries, and controller config
 environments/
-  local/                     Git-tracked native Kind image overlay
+  local/                     Historical Phase 3/4 native image overlay
+  cluster-kind/              Active exact-image cache pull policy
   dev/                       Namespace + one replica
-  staging/                   Namespace + two replicas (rendered only)
-  prod/                      Namespace + three replicas (rendered only)
+  staging/                   Two replicas, manual Argo sync, staging branch
+  prod/                      Three replicas, prod branch; pending human review
 scripts/validate-chart.sh     Lint, render, Kubernetes schemas, and negative cases
-.github/workflows/validate.yml Static validation only; no cluster credentials
+.github/workflows/validate.yml Chart and trusted-main promotion checks
+.github/workflows/promote.yml Repo-scoped token creates digest promotion PRs
+policies/release.json          Source, health and human reviewer allowlists
 DOCS/                        Architecture, setup, and verification evidence
 ```
 
@@ -54,11 +58,10 @@ of pre-provisioned secrets; it never embeds registry passwords.
 
 ## Run DEV locally
 
-Phase 3 first bootstraps Kind and loads the scanned native image. Phase 4 uses
-[the Argo CD guide](https://github.com/prasanthece42/aegis-cicd/blob/main/DOCS/17-argocd-guide.md)
-to connect this repo and hand over reconciliation. The tracked environments/local
-profile supplies the native digest; dev/staging/prod retain their GHCR references.
-After handoff, change Git rather than rerunning manual Helm bootstrap.
+Use the application [Phase 5 guide](https://github.com/prasanthece42/aegis-cicd/blob/main/DOCS/20-release-management-guide.md).
+Argo reads this public repository over HTTPS without a deploy key. A verified OCI
+bundle imports the private GHCR release into the local Kind cache without a registry
+PAT. Active Applications use environment values plus cluster-kind pull policy.
 
 Namespace manifests enable the Restricted Pod Security policy at v1.35. The chart
 sets non-root UID/GID 10001, a read-only root filesystem, dropped capabilities,
@@ -72,9 +75,10 @@ routing; port-forwarding is the local access path. No ingress or load balancer i
 | --- | --- |
 | [Architecture](DOCS/01-architecture.md) | Repository boundaries and chart design |
 | [Verification](DOCS/02-verification.md) | Historical Phase 3 results and limitations |
-| [Argo CD](DOCS/03-argocd.md) | Current reconciliation, ownership, and private-repo authentication |
+| [Argo CD](DOCS/03-argocd.md) | Historical Phase 4 reconciliation and authentication |
+| [Release management](DOCS/04-release-management.md) | Current branch controls, health gates and digest promotion |
 
-Tracked DEV/STAGING/PROD values reference the verified Phase 2 GHCR digest. Those
-values do not grant permission to deploy STAGING or PROD; only DEV is installed here.
-A digest does not supply registry authentication. The private GHCR image remains
-linux/amd64; direct GHCR pulls and multi-platform release support are separate work.
+DEV and STAGING reference the same tested OCI index; promotion preserves that digest.
+Production needs a fresh independent human review, successful checks, merge, and explicit
+Argo sync. CI never receives Kubernetes credentials. Health observations expire after
+24 hours and are operator-attributed, not signed attestations. All deployments are local.
