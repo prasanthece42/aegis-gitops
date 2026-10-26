@@ -1,0 +1,8 @@
+# Kind-only native image profile. Never substitute this digest for the GHCR release.
+environment: dev
+replicaCount: 1
+image:
+  repository: docker.io/library/aegis-sample
+  digest: sha256:ca29d52da6d8bcf428b685b98941025deec79d90060772e909449a8795234f00
+  pullPolicy: Never
+sourceCommit: "32952da316d443f514e6bc4aaa0b6f6fd693c520"
