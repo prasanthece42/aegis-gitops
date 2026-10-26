@@ -8,7 +8,7 @@ sourceCommit: 51702a46d18ecdec39ba9f94ecbc47a28228d815
 resources:
   requests:
     cpu: 100m
-    memory: 4Mi
+    memory: 64Mi
   limits:
     cpu: 500m
-    memory: 8Mi
+    memory: 128Mi
