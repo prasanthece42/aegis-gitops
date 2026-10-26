@@ -2,9 +2,9 @@ environment: dev
 replicaCount: 1
 image:
   repository: ghcr.io/prasanthece42/aegis-cicd
-  digest: sha256:8ba2f15da2eb2bd85599006d04dfa4abbb294eef41322e1f9843b263431ae0a4
+  digest: sha256:a18c6217b4dcc160a8358bec59d39db9fa9c117089e8f032d98a86058b0e63bd
   pullPolicy: IfNotPresent
-sourceCommit: 7092966cd9429f7b9b7c390af7128452322ec4f7
+sourceCommit: 5623846fc2e4ad4a89c7797ec9a71f2b0b87aea2
 resources:
   requests:
     cpu: 100m
