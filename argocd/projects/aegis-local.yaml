@@ -6,17 +6,17 @@ metadata:
 spec:
   description: Local Aegis DEV workload only
   sourceRepos:
-    - git@github.com:prasanthece42/aegis-gitops.git
+  - https://github.com/prasanthece42/aegis-gitops.git
   destinations:
-    - server: https://kubernetes.default.svc
-      namespace: aegis-dev
+  - server: https://kubernetes.default.svc
+    namespace: aegis-dev
   clusterResourceWhitelist:
-    - group: ""
-      kind: Namespace
+  - group: ''
+    kind: Namespace
   namespaceResourceWhitelist:
-    - group: apps
-      kind: Deployment
-    - group: ""
-      kind: Service
-    - group: ""
-      kind: ServiceAccount
+  - group: apps
+    kind: Deployment
+  - group: ''
+    kind: Service
+  - group: ''
+    kind: ServiceAccount

@@ -1,0 +1,8 @@
+{
+  "source_repository": "prasanthece42/aegis-cicd",
+  "gitops_repository": "prasanthece42/aegis-gitops",
+  "health_observers": ["prasanthece42"],
+  "production_reviewers": ["prasanthece42"],
+  "health_max_age_hours": 24,
+  "branches": {"dev": "main", "staging": "staging", "prod": "prod"}
+}

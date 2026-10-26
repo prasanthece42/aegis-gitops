@@ -1,0 +1,3 @@
+# Local transport imports exact registry OCI content before promotion.
+image:
+  pullPolicy: Never

@@ -1,0 +1,22 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: aegis-staging
+  namespace: argocd
+spec:
+  description: Local STAGING workload only
+  sourceRepos:
+  - https://github.com/prasanthece42/aegis-gitops.git
+  destinations:
+  - server: https://kubernetes.default.svc
+    namespace: aegis-staging
+  clusterResourceWhitelist:
+  - group: ''
+    kind: Namespace
+  namespaceResourceWhitelist:
+  - group: apps
+    kind: Deployment
+  - group: ''
+    kind: Service
+  - group: ''
+    kind: ServiceAccount

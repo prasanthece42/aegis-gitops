@@ -6,14 +6,14 @@ metadata:
 spec:
   project: aegis-local
   source:
-    repoURL: git@github.com:prasanthece42/aegis-gitops.git
+    repoURL: https://github.com/prasanthece42/aegis-gitops.git
     targetRevision: main
     path: charts/sample-api
     helm:
       releaseName: sample-api
       valueFiles:
-        - ../../environments/dev/values.yaml
-        - ../../environments/local/values.yaml
+      - ../../environments/dev/values.yaml
+      - ../../environments/cluster-kind/values.yaml
   destination:
     server: https://kubernetes.default.svc
     namespace: aegis-dev
@@ -32,10 +32,10 @@ spec:
         pod-security.kubernetes.io/warn: restricted
         pod-security.kubernetes.io/warn-version: v1.35
     syncOptions:
-      - CreateNamespace=true
-      - ServerSideApply=true
-      - PruneLast=true
-      - FailOnSharedResource=true
+    - CreateNamespace=true
+    - ServerSideApply=true
+    - PruneLast=true
+    - FailOnSharedResource=true
     retry:
       limit: 3
       backoff:
