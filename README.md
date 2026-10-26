@@ -1,7 +1,7 @@
 # Aegis GitOps
 
 The deployment configuration repository for Aegis CI/CD. Application source and
-release workflows live separately in `../aegis-cicd`.
+release workflows live separately in [aegis-cicd](https://github.com/prasanthece42/aegis-cicd).
 
 Current scope is Phase 3: a Helm chart and environment values. DEV is manually
 installed into a local Kind cluster from the workstation. Argo CD, automated
@@ -15,6 +15,8 @@ flowchart LR
     Helm --> Account[ServiceAccount without token mounting]
     Deployment --> API[FastAPI /health]
 ```
+
+Verified [GitHub chart validation](https://github.com/prasanthece42/aegis-gitops/actions/runs/40249510939) passes.
 
 ## Project structure
 
@@ -50,7 +52,8 @@ of pre-provisioned secrets; it never embeds registry passwords.
 ## Run DEV locally
 
 Use the application repository's `scripts/bootstrap-local-k8s.sh` and
-`scripts/verify-local-k8s.sh`; see its DOCS/14-kubernetes-helm-guide.md. It creates an
+`scripts/verify-local-k8s.sh`; see the
+[local deployment guide](https://github.com/prasanthece42/aegis-cicd/blob/main/DOCS/14-kubernetes-helm-guide.md). It creates an
 isolated `kind-aegis-dev` context and loads a scanned native image using a generated,
 gitignored local digest override. It does not change the tracked GHCR desired state.
 
