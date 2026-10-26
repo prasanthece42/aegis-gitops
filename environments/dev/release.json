@@ -1,6 +1,6 @@
 {
-  "release_tag": "release-40336709197-1",
-  "image": "ghcr.io/prasanthece42/aegis-cicd@sha256:8c0de9528adad12a9977c0e9eb8ff22f6fe205613e227b5cbc7bc4375ae9019d",
-  "source_commit": "14e2878b0029de48bccb6dd9c53d940e0205a580",
+  "release_tag": "release-40342456590-1",
+  "image": "ghcr.io/prasanthece42/aegis-cicd@sha256:8ba2f15da2eb2bd85599006d04dfa4abbb294eef41322e1f9843b263431ae0a4",
+  "source_commit": "7092966cd9429f7b9b7c390af7128452322ec4f7",
   "origin": null
 }
