@@ -5,7 +5,8 @@ release workflows live separately in [aegis-cicd](https://github.com/prasanthece
 
 Current scope is Phase 5: public GitOps configuration with protected DEV, STAGING
 and PROD branches. DEV and STAGING run the same validated multi-platform image in
-local Kind. PROD PR #3 awaits human approval; PROD is not deployed.
+local Kind. PROD PR #3 was independently reviewed after explicit user approval, merged with all
+checks passing, and deployed three healthy replicas in local Kind.
 See [release management](DOCS/04-release-management.md).
 
 ```mermaid
@@ -79,6 +80,6 @@ routing; port-forwarding is the local access path. No ingress or load balancer i
 | [Release management](DOCS/04-release-management.md) | Current branch controls, health gates and digest promotion |
 
 DEV and STAGING reference the same tested OCI index; promotion preserves that digest.
-Production needs a fresh independent human review, successful checks, merge, and explicit
+Each production promotion needs a fresh independent human review, successful checks, merge, and explicit
 Argo sync. CI never receives Kubernetes credentials. Health observations expire after
 24 hours and are operator-attributed, not signed attestations. All deployments are local.

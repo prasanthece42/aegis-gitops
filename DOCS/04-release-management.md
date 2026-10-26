@@ -45,16 +45,23 @@ bash scripts/validate-chart.sh
 
 - DEV PR #1 merged; Argo became Synced/Healthy at the chosen release digest.
 - STAGING PR #2 merged; explicit Argo sync deployed two healthy replicas at that digest.
-- PROD PR #3 is open: missing human approval intentionally fails policy. No PROD sync occurred.
+- PROD PR #3 initially failed without human approval; the local sync helper refused it.
+- After explicit user authorization, the unchanged PROD head received independent human
+  approval; all checks passed, including rerun of the original failed PR suite.
+- PROD merged at 38a294e48dcc77f1331abb7693900b7acbc4721f; Argo deployed three healthy
+  replicas at the same exact image digest, with real Service HTTP verified.
 - DEV failure drill PR #4 lowered memory to 8Mi; the new pod was OOMKilled.
 - A STAGING promotion attempt against failed DEV was rejected by the health gate.
 - Rollback PR #5 restored memory; Argo recovered DEV without changing the image.
 
 Source release: [40259693000](https://github.com/prasanthece42/aegis-cicd/actions/runs/40259693000).
 Index digest: sha256:e02908653b52ef077cbcde43874edb49449f1bc47af5a7e469e17f0bc8fee8ef.
-Production review: [PR #3](https://github.com/prasanthece42/aegis-gitops/pull/3).
+Completed production review: [PR #3](https://github.com/prasanthece42/aegis-gitops/pull/3).
 
 For full code explanations, local commands, failure evidence and limitations, read the
 [application release guide](https://github.com/prasanthece42/aegis-cicd/blob/main/DOCS/20-release-management-guide.md)
 and [Phase 5 report](https://github.com/prasanthece42/aegis-cicd/blob/main/DOCS/21-phase-5-report.md).
-The background local bridge awaits separate approval. No AWS resources are provisioned.
+The background local bridge was separately approved, started and checked alive. It
+polls while the workstation is awake and proposes DEV releases; it never approves or
+syncs PROD. Future DEV releases may advance independently of STAGING/PROD.
+No AWS resources are provisioned.
