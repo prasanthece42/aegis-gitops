@@ -1,0 +1,4 @@
+.local/
+reports/
+*.tgz
+.DS_Store

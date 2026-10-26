@@ -1,0 +1,37 @@
+name: Validate Helm chart
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  chart:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Install checksum-pinned Helm and kubeconform
+        run: |
+          mkdir -p "$RUNNER_TEMP/aegis-tools"
+          cd "$RUNNER_TEMP/aegis-tools"
+          curl --fail --silent --show-error --location \
+            https://get.helm.sh/helm-v4.2.4-linux-amd64.tar.gz --output helm.tar.gz
+          echo 'c306b46f719b0a4da32d0f78ee21bf90ce8d602f15b22ab753f0674d1670a7f3  helm.tar.gz' | sha256sum --check
+          tar -xzf helm.tar.gz linux-amd64/helm
+          mv linux-amd64/helm helm
+          curl --fail --silent --show-error --location \
+            https://github.com/yannh/kubeconform/releases/download/v0.8.0/kubeconform-linux-amd64.tar.gz --output kubeconform.tar.gz
+          echo '9bc2bffbf71f261128533edaf912153948b7ff238f9a531ae6d34466ec287883  kubeconform.tar.gz' | sha256sum --check
+          tar -xzf kubeconform.tar.gz kubeconform
+          echo "$RUNNER_TEMP/aegis-tools" >> "$GITHUB_PATH"
+      - name: Check shell syntax
+        run: bash -n scripts/*.sh
+      - name: Lint, render, validate schemas, and reject unsafe inputs
+        run: bash scripts/validate-chart.sh

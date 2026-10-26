@@ -1,0 +1,5 @@
+Release {{ .Release.Name }} is configured in namespace {{ .Release.Namespace }}.
+Image: {{ .Values.image.repository }}@{{ .Values.image.digest }}
+
+Wait for rollout, then port-forward Service/{{ include "sample-api.name" . }} on port {{ .Values.service.port }}.
+A successful Helm install alone does not establish application health.
