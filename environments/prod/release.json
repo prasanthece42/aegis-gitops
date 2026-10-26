@@ -1,0 +1,9 @@
+{
+  "release_tag": "release-40259693000-1",
+  "image": "ghcr.io/prasanthece42/aegis-cicd@sha256:e02908653b52ef077cbcde43874edb49449f1bc47af5a7e469e17f0bc8fee8ef",
+  "source_commit": "51702a46d18ecdec39ba9f94ecbc47a28228d815",
+  "origin": {
+    "environment": "staging",
+    "git_revision": "ac40770c03aa6b7708d37fb30e5de23adb132544"
+  }
+}
