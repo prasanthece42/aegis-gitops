@@ -3,17 +3,18 @@
 The deployment configuration repository for Aegis CI/CD. Application source and
 release workflows live separately in [aegis-cicd](https://github.com/prasanthece42/aegis-cicd).
 
-Current scope is Phase 3: a Helm chart and environment values. DEV is manually
-installed into a local Kind cluster from the workstation. Argo CD, automated
-reconciliation, promotion approvals, and cross-repository updates are later phases.
+Current scope is Phase 4: Argo CD watches this private repository and reconciles
+local DEV using the chart and tracked native-image profile. Promotion approvals
+and automated cross-repository release updates remain later work.
 
 ```mermaid
 flowchart LR
-    Values[Environment values] --> Helm[Helm chart]
-    Helm --> Deployment[Deployment and Pods]
-    Helm --> Service[ClusterIP Service]
-    Helm --> Account[ServiceAccount without token mounting]
+    Values[Git main: chart and local values] --> Argo[Argo CD renders Helm]
+    Argo --> Deployment[Deployment and Pods]
+    Argo --> Service[ClusterIP Service]
     Deployment --> API[FastAPI /health]
+    Deployment --> Drift[Live drift corrected to Git]
+    Drift --> Argo
 ```
 
 Verified [GitHub chart validation](https://github.com/prasanthece42/aegis-gitops/actions/runs/40249510939) passes.
@@ -26,7 +27,9 @@ charts/sample-api/
   values.yaml                Secure defaults and published image digest
   values.schema.json         Required digest, replicas, and resource input validation
   templates/                 Deployment, Service, ServiceAccount, helpers, notes
+argocd/                      Application, project boundaries, and controller config
 environments/
+  local/                     Git-tracked native Kind image overlay
   dev/                       Namespace + one replica
   staging/                   Namespace + two replicas (rendered only)
   prod/                      Namespace + three replicas (rendered only)
@@ -44,18 +47,18 @@ to versioned Kubernetes JSON schemas. Run:
 bash scripts/validate-chart.sh
 ```
 
-The script validates all three environments against Kubernetes 1.35 schemas and
+The script validates all three environments plus the local profile against Kubernetes 1.35 schemas and
 checks that missing/malformed digests and zero replicas are rejected. There are no
 rendered Secrets or credentials in this repository. `imagePullSecrets` accepts names
 of pre-provisioned secrets; it never embeds registry passwords.
 
 ## Run DEV locally
 
-Use the application repository's `scripts/bootstrap-local-k8s.sh` and
-`scripts/verify-local-k8s.sh`; see the
-[local deployment guide](https://github.com/prasanthece42/aegis-cicd/blob/main/DOCS/14-kubernetes-helm-guide.md). It creates an
-isolated `kind-aegis-dev` context and loads a scanned native image using a generated,
-gitignored local digest override. It does not change the tracked GHCR desired state.
+Phase 3 first bootstraps Kind and loads the scanned native image. Phase 4 uses
+[the Argo CD guide](https://github.com/prasanthece42/aegis-cicd/blob/main/DOCS/17-argocd-guide.md)
+to connect this repo and hand over reconciliation. The tracked environments/local
+profile supplies the native digest; dev/staging/prod retain their GHCR references.
+After handoff, change Git rather than rerunning manual Helm bootstrap.
 
 Namespace manifests enable the Restricted Pod Security policy at v1.35. The chart
 sets non-root UID/GID 10001, a read-only root filesystem, dropped capabilities,
@@ -68,7 +71,8 @@ routing; port-forwarding is the local access path. No ingress or load balancer i
 | Guide | Purpose |
 | --- | --- |
 | [Architecture](DOCS/01-architecture.md) | Repository boundaries and chart design |
-| [Verification](DOCS/02-verification.md) | Local/remote results and limitations |
+| [Verification](DOCS/02-verification.md) | Historical Phase 3 results and limitations |
+| [Argo CD](DOCS/03-argocd.md) | Current reconciliation, ownership, and private-repo authentication |
 
 Tracked DEV/STAGING/PROD values reference the verified Phase 2 GHCR digest. Those
 values do not grant permission to deploy STAGING or PROD; only DEV is installed here.

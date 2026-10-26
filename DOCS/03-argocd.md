@@ -45,8 +45,22 @@ isolated kubeconfig/context. The root project/Application definitions are applie
 once by workstation bootstrap; this is not an app-of-apps setup. Subsequent workload
 changes are read from Git automatically.
 
-Validation reports and live demonstration results will be recorded after execution
-in the sibling application's DOCS/18-phase-4-report.md.
+## Verified real Git flow
+
+- Setup commit 8c5ef9f: Synced/Healthy, one replica.
+- Commit 25dcd8c: changed local replicaCount to two; Argo polled and applied it automatically.
+- A live scale to three produced OutOfSync; self-healing restored two without a new Git commit.
+- Revert 6400f50: Argo automatically restored one replica and healthy HTTP.
+
+No manual Argo sync/refresh or Helm upgrade drove these stages. The AppProject
+rejected a temporary forbidden-destination application with automated sync disabled;
+that test definition was removed. Argo server /healthz and manual-Helm guard passed.
+
+GitHub validation passed for [setup](https://github.com/prasanthece42/aegis-gitops/actions/runs/40250659921),
+[scale](https://github.com/prasanthece42/aegis-gitops/actions/runs/40250732778), and
+[revert](https://github.com/prasanthece42/aegis-gitops/actions/runs/40250770351).
+Full evidence and the local receipt are in the sibling application's
+[Phase 4 report](https://github.com/prasanthece42/aegis-cicd/blob/main/DOCS/18-phase-4-report.md).
 
 This phase connects GitOps changes to Kubernetes. Publishing a new GHCR image still
 does not automatically modify GitOps. Cross-repository release updates are a separate

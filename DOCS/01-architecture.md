@@ -1,5 +1,8 @@
 # GitOps repository architecture — Phase 3
 
+Historical Helm bootstrap design. [Phase 4](03-argocd.md) now supplies continuous
+Argo CD reconciliation and a tracked local profile.
+
 The chart owns one Deployment, ClusterIP Service, and ServiceAccount per Helm release.
 The environment directory owns its Namespace manifest and values. The namespace is
 created separately before Helm installation, avoiding conflicting namespace ownership.
