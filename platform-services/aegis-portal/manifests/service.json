@@ -1,0 +1,1 @@
+{"apiVersion":"v1","kind":"Service","metadata":{"labels":{"aegis.io/component":"portal-system","app.kubernetes.io/name":"aegis-portal"},"name":"aegis-portal","namespace":"aegis-portal-system"},"spec":{"ports":[{"name":"http","port":80,"targetPort":"http"}],"selector":{"aegis.io/component":"portal-system","app.kubernetes.io/name":"aegis-portal"},"type":"ClusterIP"}}
