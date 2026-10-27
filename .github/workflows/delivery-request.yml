@@ -1,0 +1,50 @@
+name: Process authorized Aegis request
+
+on:
+  workflow_dispatch:
+    inputs:
+      request_id:
+        description: Canonical signed request ID
+        type: string
+        required: true
+      issue_number:
+        description: Bound platform issue number
+        type: string
+        required: true
+
+permissions:
+  contents: read
+
+concurrency:
+  group: aegis-request-${{ inputs.request_id }}
+  cancel-in-progress: false
+
+jobs:
+  propose:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    permissions:
+      contents: write
+      pull-requests: write
+      actions: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          repository: prasanthece42/aegis-platform
+          ref: 352a7f4af374c1e1295c20650861a6bd6794c29a
+          persist-credentials: false
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: '3.12'
+      - run: python -m pip install --require-hashes -r requirements.txt
+      - name: Verify canonical request and propose exact app diff
+        env:
+          PYTHONPATH: src
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          AEGIS_APP_ID: '5488289'
+          AEGIS_PLATFORM_INSTALLATION_ID: '175648688'
+          AEGIS_APP_PRIVATE_KEY: ${{ secrets.AEGIS_APP_PRIVATE_KEY }}
+          REQUEST_ID: ${{ inputs.request_id }}
+          ISSUE_NUMBER: ${{ inputs.issue_number }}
+        run: python tooling/delivery.py propose --request-id "$REQUEST_ID" --issue-number "$ISSUE_NUMBER"
