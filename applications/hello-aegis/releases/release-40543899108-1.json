@@ -1,0 +1,57 @@
+{
+  "app_id": "hello-aegis",
+  "source_repository": "prasanthece42/hello-aegis",
+  "source_repository_id": "1436010240",
+  "source_commit": "0e5c7741ea7f49614fdfee2094efe3998bd129cc",
+  "workflow_run_id": "40543899108",
+  "run_attempt": "1",
+  "platform_commit": "b4f46baa41dc250a88c86f63ecb0949d5f14af02",
+  "schema_version": 3,
+  "release_tag": "release-40543899108-1",
+  "verified_at": "2026-10-27T16:47:30.890725+00:00",
+  "image": "ghcr.io/prasanthece42/hello-aegis@sha256:fa349366d20e4d363705ab6aa84be767363fd354ec53865d1d176173e00c1df3",
+  "platforms": {
+    "linux/amd64": {
+      "app_id": "hello-aegis",
+      "source_repository": "prasanthece42/hello-aegis",
+      "source_repository_id": "1436010240",
+      "source_commit": "0e5c7741ea7f49614fdfee2094efe3998bd129cc",
+      "workflow_run_id": "40543899108",
+      "run_attempt": "1",
+      "platform_commit": "b4f46baa41dc250a88c86f63ecb0949d5f14af02",
+      "schema_version": 1,
+      "platform": "linux/amd64",
+      "image": "ghcr.io/prasanthece42/hello-aegis@sha256:7625b8685b7a728c1c10f53cdabdf13bbad2ef341562837512c4835dd41f3c14",
+      "image_config_digest": "sha256:bfa350b328f0022270a689d335c367d1642eda7c0e203ef34464246f475e8c5b",
+      "candidate_archive_sha256": "sha256:b09bd3da0fbbf02167017e692ab6f4fb42ef67a4cf74e20a8543425812834613",
+      "digest_pull_smoke_test": "passed",
+      "evidence_sha256": {
+        "dependencies.json": "sha256:45f06b0e1c0ad53b4c0585a9fb2c971726e197a028d9b7212bf1333b63441f8d",
+        "image.json": "sha256:16dab4bb07d9dd50dc6746c48ba3b015a1ea261e51491b44c90b338facee5434",
+        "sbom.cdx.json": "sha256:addad9d599cc684793536205818e07c50e181b0761c685bc2f7e75fef452f41c"
+      }
+    },
+    "linux/arm64": {
+      "app_id": "hello-aegis",
+      "source_repository": "prasanthece42/hello-aegis",
+      "source_repository_id": "1436010240",
+      "source_commit": "0e5c7741ea7f49614fdfee2094efe3998bd129cc",
+      "workflow_run_id": "40543899108",
+      "run_attempt": "1",
+      "platform_commit": "b4f46baa41dc250a88c86f63ecb0949d5f14af02",
+      "schema_version": 1,
+      "platform": "linux/arm64",
+      "image": "ghcr.io/prasanthece42/hello-aegis@sha256:3e4927494968d1876ff8aa4187362e0356174f1a965fc721a4c28f95a9661391",
+      "image_config_digest": "sha256:e6350b7d6e221cfdd641fb54eff4ead2db985cb98e7e8ac229eb928e23f93f0a",
+      "candidate_archive_sha256": "sha256:dbea712765132a2313a250eaa8856f15e73f652250165bf193ded3661e4fd223",
+      "digest_pull_smoke_test": "passed",
+      "evidence_sha256": {
+        "dependencies.json": "sha256:45f06b0e1c0ad53b4c0585a9fb2c971726e197a028d9b7212bf1333b63441f8d",
+        "image.json": "sha256:1273ae9509cf3522b1173ca94be4c8b92f2b0353e976e1867c3e978a7459e173",
+        "sbom.cdx.json": "sha256:4a6d8add8536a4460cabcf3b0c131418a04ad680aeb8da5ebeb16e24d23ea924"
+      }
+    }
+  },
+  "bundle_sha256": "sha256:c7775ccdef4a670881b061e3bbf1879f744fc2635b4989c2afb5bb5f7af5dcab",
+  "provenance": "Unsigned workflow evidence; admission must verify GitHub source/run identity"
+}
