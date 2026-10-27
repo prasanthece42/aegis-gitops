@@ -1,0 +1,69 @@
+name: Aegis delivery admission
+
+on:
+  # Privileged metadata-only inspection: never check out or execute PR/source code.
+  pull_request_target:
+    branches: [main, staging, prod]
+    types: [opened, synchronize, reopened, edited]
+  pull_request_review:
+    types: [submitted, dismissed]
+  workflow_run:
+    workflows: ['Validate Helm chart']
+    types: [completed]
+  workflow_dispatch:
+    inputs:
+      request_id:
+        type: string
+        default: ''
+      issue_number:
+        type: string
+        default: ''
+      pr_number:
+        type: string
+        required: true
+
+permissions:
+  contents: read
+
+concurrency:
+  group: aegis-policy-${{ github.event.pull_request.number || inputs.pr_number }}
+  cancel-in-progress: false
+
+jobs:
+  admission:
+    if: >-
+      (github.event_name != 'workflow_dispatch' || github.ref == 'refs/heads/main') &&
+      (github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success')
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    permissions:
+      contents: read
+      pull-requests: read
+      statuses: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          repository: prasanthece42/aegis-platform
+          ref: dae115176b1e76bfeb2374e9a65b30519737c2df
+          persist-credentials: false
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: '3.12'
+      - run: python -m pip install --require-hashes -r requirements.txt
+      - name: Validate exact PR head using fresh trusted metadata
+        env:
+          PYTHONPATH: src
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          AEGIS_APP_ID: '5488289'
+          AEGIS_PLATFORM_INSTALLATION_ID: '175648688'
+          AEGIS_APP_PRIVATE_KEY: ${{ secrets.AEGIS_APP_PRIVATE_KEY }}
+          PR_NUMBER: ${{ github.event.pull_request.number || inputs.pr_number }}
+          RUN_HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
+          RUN_HEAD_BRANCH: ${{ github.event.workflow_run.head_branch }}
+          EVENT_NAME: ${{ github.event_name }}
+        run: |
+          if [[ "$EVENT_NAME" == workflow_run ]]; then
+            python tooling/delivery.py check-run
+          else
+            python tooling/delivery.py check-event
+          fi
