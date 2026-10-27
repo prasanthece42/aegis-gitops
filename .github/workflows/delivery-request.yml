@@ -25,14 +25,12 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 15
     permissions:
-      contents: write
-      pull-requests: write
-      actions: write
+      contents: read
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           repository: prasanthece42/aegis-platform
-          ref: 4aeb2d062d28f727790724eb19f867f7ed7036de
+          ref: 90ea7ec4ce6ccb009c2921c2dbc5db1134d34259
           persist-credentials: false
       - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
         with:
@@ -44,6 +42,7 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           AEGIS_APP_ID: '5488289'
           AEGIS_PLATFORM_INSTALLATION_ID: '175648688'
+          AEGIS_GITOPS_INSTALLATION_ID: '175648688'
           AEGIS_APP_PRIVATE_KEY: ${{ secrets.AEGIS_APP_PRIVATE_KEY }}
           REQUEST_ID: ${{ inputs.request_id }}
           ISSUE_NUMBER: ${{ inputs.issue_number }}
