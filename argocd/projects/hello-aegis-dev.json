@@ -1,0 +1,38 @@
+{
+  "apiVersion": "argoproj.io/v1alpha1",
+  "kind": "AppProject",
+  "metadata": {
+    "name": "hello-aegis-dev",
+    "namespace": "argocd",
+    "labels": {
+      "aegis.io/app": "hello-aegis",
+      "aegis.io/environment": "dev"
+    }
+  },
+  "spec": {
+    "sourceRepos": [
+      "https://github.com/prasanthece42/aegis-gitops.git"
+    ],
+    "destinations": [
+      {
+        "server": "https://kubernetes.default.svc",
+        "namespace": "aegis-hello-aegis-dev"
+      }
+    ],
+    "clusterResourceWhitelist": [],
+    "namespaceResourceWhitelist": [
+      {
+        "group": "apps",
+        "kind": "Deployment"
+      },
+      {
+        "group": "",
+        "kind": "Service"
+      },
+      {
+        "group": "",
+        "kind": "ServiceAccount"
+      }
+    ]
+  }
+}

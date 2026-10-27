@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "app_id": "hello-aegis",
+  "environment": "dev",
+  "cluster_uid": "668172eb-130b-4b59-8629-7448aaa382e9",
+  "catalog_entry_hash": "sha256:766f9e92ba05b82a1a60afbd7c15d7c2e79252a2933f9d8121a899233b945a01",
+  "bootstrap_policy_hash": "sha256:ef1315d9b12e7beb8dc02a98917fc55cf35a02eb613ad964f3a0024b04e2a38e",
+  "chart_sha256": "sha256:13c8977cb701a05fcff28fa6cf22067146ed56ad05d6ce760499a22e11f79570",
+  "requires_operator_bootstrap": true,
+  "requires_production_review": false,
+  "status": "review-only-not-applied"
+}

@@ -1,0 +1,47 @@
+{
+  "apiVersion": "argoproj.io/v1alpha1",
+  "kind": "Application",
+  "metadata": {
+    "name": "hello-aegis-dev",
+    "namespace": "argocd",
+    "labels": {
+      "aegis.io/app": "hello-aegis",
+      "aegis.io/environment": "dev"
+    },
+    "annotations": {
+      "aegis.io/catalog-entry-hash": "sha256:766f9e92ba05b82a1a60afbd7c15d7c2e79252a2933f9d8121a899233b945a01",
+      "aegis.io/chart-sha256": "sha256:13c8977cb701a05fcff28fa6cf22067146ed56ad05d6ce760499a22e11f79570",
+      "aegis.io/human-review-required": "false"
+    }
+  },
+  "spec": {
+    "project": "hello-aegis-dev",
+    "source": {
+      "repoURL": "https://github.com/prasanthece42/aegis-gitops.git",
+      "targetRevision": "main",
+      "path": "charts/web-service/1.0.0",
+      "helm": {
+        "releaseName": "hello-aegis",
+        "valueFiles": [
+          "../../../applications/hello-aegis/environments/dev/values.yaml"
+        ]
+      }
+    },
+    "destination": {
+      "server": "https://kubernetes.default.svc",
+      "namespace": "aegis-hello-aegis-dev"
+    },
+    "syncPolicy": {
+      "syncOptions": [
+        "ServerSideApply=true",
+        "PruneLast=true",
+        "FailOnSharedResource=true"
+      ],
+      "automated": {
+        "prune": true,
+        "selfHeal": true,
+        "allowEmpty": false
+      }
+    }
+  }
+}
