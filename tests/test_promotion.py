@@ -79,3 +79,59 @@ def test_mutable_image_receipt_fails():
             },
             "release-1-1",
         )
+
+
+@pytest.mark.parametrize(
+    "branch,prefix",
+    [
+        ("platform-system", "platform-services/aegis-portal/"),
+        ("platform-observability", "platform-services/aegis-observability/"),
+    ],
+)
+def test_operator_owned_scope_uses_dedicated_admission_not_environment_pointer(
+    monkeypatch, branch, prefix
+):
+    from scripts import promotion
+
+    pr = {"head": {"sha": SHA}, "base": {"ref": branch}, "changed_files": 1}
+
+    def api(path):
+        return (
+            [{"filename": prefix + "review.json", "status": "modified"}]
+            if "/files?" in path
+            else pr
+        )
+
+    monkeypatch.setattr(promotion, "api", api)
+    monkeypatch.setattr(
+        promotion, "verify_pointer", lambda *args: pytest.fail("Legacy pointer validation used")
+    )
+    promotion.verify_pr(26, SHA)
+
+
+@pytest.mark.parametrize(
+    "mutation",
+    ["outside", "environment", "rename", "removed", "head", "unknown_branch", "incomplete"],
+)
+def test_operator_owned_delegation_cannot_cover_unrelated_or_stale_changes(monkeypatch, mutation):
+    from scripts import promotion
+
+    pr = {"head": {"sha": SHA}, "base": {"ref": "platform-system"}, "changed_files": 1}
+    file = {"filename": "platform-services/aegis-portal/review.json", "status": "modified"}
+    if mutation == "outside":
+        file["filename"] = ".github/workflows/override.yml"
+    elif mutation == "environment":
+        file["filename"] = "environments/prod/values.yaml"
+    elif mutation == "rename":
+        file["previous_filename"] = "environments/prod/values.yaml"
+    elif mutation == "removed":
+        file["status"] = "removed"
+    elif mutation == "head":
+        pr["head"]["sha"] = "c" * 40
+    elif mutation == "unknown_branch":
+        pr["base"]["ref"] = "untrusted-system"
+    elif mutation == "incomplete":
+        pr["changed_files"] = 2
+    monkeypatch.setattr(promotion, "api", lambda path: [file] if "/files?" in path else pr)
+    with pytest.raises(ValueError):
+        promotion.verify_pr(26, SHA)
