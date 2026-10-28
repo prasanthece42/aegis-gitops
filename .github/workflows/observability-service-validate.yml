@@ -30,7 +30,7 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
         with:
           repository: prasanthece42/aegis-platform
-          ref: 86e4b2836c5172200914eb42535605d9045fe6f6
+          ref: cbe1f2517c5aa9fbef4733f8acfe645f4ef8ca2a
           persist-credentials: false
       - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0
         with:
