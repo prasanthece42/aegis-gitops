@@ -1,0 +1,47 @@
+name: Observability operator admission
+on:
+  pull_request_target:
+    branches: [platform-observability]
+    types: [opened, synchronize, reopened, edited]
+  pull_request_review:
+    types: [submitted, dismissed]
+  workflow_dispatch:
+    inputs:
+      pr_number:
+        type: string
+        required: true
+permissions:
+  contents: read
+concurrency:
+  group: aegis-observability-${{ github.event.pull_request.number || inputs.pr_number }}
+  cancel-in-progress: false
+jobs:
+  admission:
+    if: >-
+      (github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main') ||
+      github.event.pull_request.base.ref == 'platform-observability'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    permissions:
+      contents: read
+      pull-requests: read
+      statuses: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          repository: prasanthece42/aegis-platform
+          ref: 86e4b2836c5172200914eb42535605d9045fe6f6
+          persist-credentials: false
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0
+        with:
+          python-version: '3.12'
+      - run: python -m pip install --require-hashes -r requirements.txt
+      - name: Verify exact plan and independent current-head review
+        env:
+          PYTHONPATH: src:.
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          AEGIS_APP_ID: '5488289'
+          AEGIS_PLATFORM_INSTALLATION_ID: '175648688'
+          AEGIS_APP_PRIVATE_KEY: ${{ secrets.AEGIS_APP_PRIVATE_KEY }}
+          PR_NUMBER: ${{ github.event.pull_request.number || inputs.pr_number }}
+        run: python -m tooling.observability_service check-pr
