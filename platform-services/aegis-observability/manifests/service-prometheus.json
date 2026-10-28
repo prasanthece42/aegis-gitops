@@ -1,0 +1,1 @@
+{"apiVersion":"v1","kind":"Service","metadata":{"labels":{"app.kubernetes.io/name":"prometheus","app.kubernetes.io/part-of":"aegis-observability"},"name":"prometheus","namespace":"aegis-observability"},"spec":{"ports":[{"name":"query","port":8080,"targetPort":"query"}],"selector":{"app.kubernetes.io/name":"prometheus"},"type":"ClusterIP"}}

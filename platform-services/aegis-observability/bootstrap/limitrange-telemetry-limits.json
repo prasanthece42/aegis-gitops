@@ -1,0 +1,1 @@
+{"apiVersion":"v1","kind":"LimitRange","metadata":{"labels":{"app.kubernetes.io/name":"telemetry-limits","app.kubernetes.io/part-of":"aegis-observability"},"name":"telemetry-limits","namespace":"aegis-observability"},"spec":{"limits":[{"default":{"cpu":"500m","memory":"512Mi"},"defaultRequest":{"cpu":"50m","memory":"64Mi"},"type":"Container"}]}}
