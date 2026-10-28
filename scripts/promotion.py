@@ -175,7 +175,14 @@ def verify_pr(number, expected_sha):
     environment = next(
         (env for env, branch in BRANCHES.items() if branch == pr["base"]["ref"]), None
     )
-    if environment is None:
+    delegated = {
+        "platform-system": ("platform-services/aegis-portal/", "aegis/platform-service-policy"),
+        "platform-observability": (
+            "platform-services/aegis-observability/",
+            "aegis/observability-policy",
+        ),
+    }.get(pr["base"]["ref"])
+    if environment is None and delegated is None:
         raise ValueError("Unsupported promotion target branch")
     files = []
     page = 1
@@ -187,6 +194,25 @@ def verify_pr(number, expected_sha):
         page += 1
     if len(files) != pr["changed_files"]:
         raise ValueError("Incomplete PR diff; refusing to validate")
+    if delegated is not None:
+        prefix, context = delegated
+        if (
+            not files
+            or len(files) > 100
+            or any(
+                not file["filename"].startswith(prefix)
+                or file["status"] not in {"added", "modified"}
+                or "previous_filename" in file
+                for file in files
+            )
+        ):
+            raise ValueError(
+                "Operator-owned PR changes paths outside its dedicated admission scope"
+            )
+        # This legacy gate only routes scope. The protected branch still requires
+        # the dedicated trusted manifest check and independent human approval.
+        print("PASS: operator-owned scope; dedicated admission still required:", context)
+        return
     env_files = [f["filename"] for f in files if f["filename"].startswith("environments/")]
     allowed = {
         f"environments/{environment}/values.yaml",
