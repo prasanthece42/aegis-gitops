@@ -1,0 +1,1 @@
+{"apiVersion":"v1","kind":"Namespace","metadata":{"labels":{"app.kubernetes.io/name":"aegis-observability","app.kubernetes.io/part-of":"aegis-observability","pod-security.kubernetes.io/enforce":"restricted","pod-security.kubernetes.io/enforce-version":"v1.35"},"name":"aegis-observability"}}
