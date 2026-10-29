@@ -1,0 +1,57 @@
+{
+  "app_id": "hello-portal",
+  "source_repository": "prasanthece42/hello-portal",
+  "source_repository_id": "1437817662",
+  "source_commit": "c5e52d63d12e1caba5a8e1405b1fe017c46c302e",
+  "workflow_run_id": "40883905860",
+  "run_attempt": "1",
+  "platform_commit": "b4f46baa41dc250a88c86f63ecb0949d5f14af02",
+  "schema_version": 3,
+  "release_tag": "release-40883905860-1",
+  "verified_at": "2026-10-29T13:42:12.023783+00:00",
+  "image": "ghcr.io/prasanthece42/hello-portal@sha256:16bd046c755c614f064e3491328556955feb83699856d6bdd319ee8118389378",
+  "platforms": {
+    "linux/amd64": {
+      "app_id": "hello-portal",
+      "source_repository": "prasanthece42/hello-portal",
+      "source_repository_id": "1437817662",
+      "source_commit": "c5e52d63d12e1caba5a8e1405b1fe017c46c302e",
+      "workflow_run_id": "40883905860",
+      "run_attempt": "1",
+      "platform_commit": "b4f46baa41dc250a88c86f63ecb0949d5f14af02",
+      "schema_version": 1,
+      "platform": "linux/amd64",
+      "image": "ghcr.io/prasanthece42/hello-portal@sha256:ca1cd7c9611db63f7ca8d39b6d99cca39e5f07b0dc145b230c7d0c98b50b1894",
+      "image_config_digest": "sha256:dd3d38ab62446ad9f65e2f3335b47ed74465d8c64136caa5bebefea1f1c2ef2f",
+      "candidate_archive_sha256": "sha256:6dee04259b5c0f7dc9e6418b017eb6c94f90b19b704235cf8466aaf0e46a7113",
+      "digest_pull_smoke_test": "passed",
+      "evidence_sha256": {
+        "dependencies.json": "sha256:16451b963957753848d0abb63f25f582b85be550a88193c74eee435b7897b9e3",
+        "image.json": "sha256:7760aaecb55c0be9f6565974f24833cd4f8c0893c584092538fdd5e4b6debb44",
+        "sbom.cdx.json": "sha256:c56ccc7cc78f14bf2bfdbb2b4deb22dea9ea82f387ca10ea59386ba06f2ed536"
+      }
+    },
+    "linux/arm64": {
+      "app_id": "hello-portal",
+      "source_repository": "prasanthece42/hello-portal",
+      "source_repository_id": "1437817662",
+      "source_commit": "c5e52d63d12e1caba5a8e1405b1fe017c46c302e",
+      "workflow_run_id": "40883905860",
+      "run_attempt": "1",
+      "platform_commit": "b4f46baa41dc250a88c86f63ecb0949d5f14af02",
+      "schema_version": 1,
+      "platform": "linux/arm64",
+      "image": "ghcr.io/prasanthece42/hello-portal@sha256:6ef80ca8a8b448b67593b2c8fb818bdf579359bba203a65c026ec97169f56d35",
+      "image_config_digest": "sha256:68480359f29220b833bc378890582e8cac57cac1205d5db314c6b2a6819c736b",
+      "candidate_archive_sha256": "sha256:3c496d3efff43486ddc4dbacfce0396a2f631ac3167859f1a130fbeff691729b",
+      "digest_pull_smoke_test": "passed",
+      "evidence_sha256": {
+        "dependencies.json": "sha256:16451b963957753848d0abb63f25f582b85be550a88193c74eee435b7897b9e3",
+        "image.json": "sha256:65cc7039db58e728dce811bc752005dec0b4df013ecbb0a24b165b380bf3acca",
+        "sbom.cdx.json": "sha256:6bee6c470d6bc7bbb87b839bf129391e75494dde004f7744a39bc4d64a1385c3"
+      }
+    }
+  },
+  "bundle_sha256": "sha256:51129255246ddf404c877e40a31c43ef0b485e30ecc18c7d1ae5d47c8cf1c065",
+  "provenance": "Unsigned workflow evidence; admission must verify GitHub source/run identity"
+}
