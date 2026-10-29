@@ -1,0 +1,57 @@
+{
+  "app_id": "aegis-portal",
+  "source_repository": "prasanthece42/aegis-portal",
+  "source_repository_id": "1435080826",
+  "source_commit": "a49076c1160db8bd55d40640dc40007a8de3e5ef",
+  "workflow_run_id": "40968062419",
+  "run_attempt": "1",
+  "platform_commit": "b4f46baa41dc250a88c86f63ecb0949d5f14af02",
+  "schema_version": 3,
+  "release_tag": "release-40968062419-1",
+  "verified_at": "2026-10-29T22:47:15.898322+00:00",
+  "image": "ghcr.io/prasanthece42/aegis-portal@sha256:c33209bed57702e99992580045169eb9d664ab5ca044c80c0f7e0cd054321cb0",
+  "platforms": {
+    "linux/amd64": {
+      "app_id": "aegis-portal",
+      "source_repository": "prasanthece42/aegis-portal",
+      "source_repository_id": "1435080826",
+      "source_commit": "a49076c1160db8bd55d40640dc40007a8de3e5ef",
+      "workflow_run_id": "40968062419",
+      "run_attempt": "1",
+      "platform_commit": "b4f46baa41dc250a88c86f63ecb0949d5f14af02",
+      "schema_version": 1,
+      "platform": "linux/amd64",
+      "image": "ghcr.io/prasanthece42/aegis-portal@sha256:ed3cc5a22b4f1f3faeee6dbfe528a6e8a3e92bfd0ef93d1abbaaba92427bbf82",
+      "image_config_digest": "sha256:7e452e7eb994ab10bf60cc71d293fc7c18ccbc95f85ffbba26d5efcd4b5a0469",
+      "candidate_archive_sha256": "sha256:8c8e2dbb6d25112074825a39daa1e9417ebda09b1662a93c885f495ff66966bb",
+      "digest_pull_smoke_test": "passed",
+      "evidence_sha256": {
+        "dependencies.json": "sha256:cfc6c4e98867322b7d0d8d95b14d1e9e0b6384970fe3a3e07335c397211404ae",
+        "image.json": "sha256:42c6fb5fa5cd0b7e640c08c6909a750a5307d837eadf7d844f5bc74bb3735cf2",
+        "sbom.cdx.json": "sha256:f312f85f41d1dc66ca2d2ba3bef2da816e91611a2ac164afa6e94aeb73aa0e63"
+      }
+    },
+    "linux/arm64": {
+      "app_id": "aegis-portal",
+      "source_repository": "prasanthece42/aegis-portal",
+      "source_repository_id": "1435080826",
+      "source_commit": "a49076c1160db8bd55d40640dc40007a8de3e5ef",
+      "workflow_run_id": "40968062419",
+      "run_attempt": "1",
+      "platform_commit": "b4f46baa41dc250a88c86f63ecb0949d5f14af02",
+      "schema_version": 1,
+      "platform": "linux/arm64",
+      "image": "ghcr.io/prasanthece42/aegis-portal@sha256:cbdbb50cfadebf83d80f57e5b626d0be06fb0107991a7aea3c48acbedc729121",
+      "image_config_digest": "sha256:bfa4f3f7035ccdf18f72e28b68820482efbf28c6232beb8bb7536aae2e551d69",
+      "candidate_archive_sha256": "sha256:737e378318ddc18ca3e800fccfbb03d8e814463c5d4736530b42693fccb7323d",
+      "digest_pull_smoke_test": "passed",
+      "evidence_sha256": {
+        "dependencies.json": "sha256:cfc6c4e98867322b7d0d8d95b14d1e9e0b6384970fe3a3e07335c397211404ae",
+        "image.json": "sha256:fadf7567c10d957c0362ce9130e8bd429b9f1e35556333acfcfc1e04becf9217",
+        "sbom.cdx.json": "sha256:dd0b313cc6368cacf5c36ed8ee407d2694d5105d2207ba4213b2d9652c7a76de"
+      }
+    }
+  },
+  "bundle_sha256": "sha256:c3a06bffb44534b54a4915683fc05cea23643e1c7704e24cc3a6bf6e6a56f12a",
+  "provenance": "Unsigned workflow evidence; admission must verify GitHub source/run identity"
+}
