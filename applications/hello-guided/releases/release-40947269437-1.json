@@ -1,0 +1,57 @@
+{
+  "app_id": "hello-guided",
+  "source_repository": "prasanthece42/hello-guided",
+  "source_repository_id": "1438906030",
+  "source_commit": "3f7842fcca1a3aea4808bd649224c48825abc3dd",
+  "workflow_run_id": "40947269437",
+  "run_attempt": "1",
+  "platform_commit": "5ea1b7e414b2e1f23fad849127e1bb72ded84b45",
+  "schema_version": 3,
+  "release_tag": "release-40947269437-1",
+  "verified_at": "2026-10-29T20:17:47.208631+00:00",
+  "image": "ghcr.io/prasanthece42/hello-guided@sha256:8128f2e695f80673ac1b4b2ce6e10f5478ae5292d864653ddc28af3666608721",
+  "platforms": {
+    "linux/amd64": {
+      "app_id": "hello-guided",
+      "source_repository": "prasanthece42/hello-guided",
+      "source_repository_id": "1438906030",
+      "source_commit": "3f7842fcca1a3aea4808bd649224c48825abc3dd",
+      "workflow_run_id": "40947269437",
+      "run_attempt": "1",
+      "platform_commit": "5ea1b7e414b2e1f23fad849127e1bb72ded84b45",
+      "schema_version": 1,
+      "platform": "linux/amd64",
+      "image": "ghcr.io/prasanthece42/hello-guided@sha256:5ee318da6b05e824df7b3bb8c82ab1b1dd3c4186ce66c5bd7b77a24f55ba9385",
+      "image_config_digest": "sha256:1235b794bc84ba70839138aa2aee7ba97445ab61b095f77fecbffb274d810617",
+      "candidate_archive_sha256": "sha256:4c3299b95cccbc2afd02fcbe20ad7b2157aca289ab590736d3a114754a27124a",
+      "digest_pull_smoke_test": "passed",
+      "evidence_sha256": {
+        "dependencies.json": "sha256:490f322a9475b4e11aee4826d780b359bff7b4ef842c18baeda0de6b556f1a6c",
+        "image.json": "sha256:14f64fbdcabd4d25384a71e0e76c984855f91486139c7895758d7a37fa2e4ab7",
+        "sbom.cdx.json": "sha256:175d06a60250def5547cf4712ed0a93013c73bb496b38d70e178f7f65ba25f7e"
+      }
+    },
+    "linux/arm64": {
+      "app_id": "hello-guided",
+      "source_repository": "prasanthece42/hello-guided",
+      "source_repository_id": "1438906030",
+      "source_commit": "3f7842fcca1a3aea4808bd649224c48825abc3dd",
+      "workflow_run_id": "40947269437",
+      "run_attempt": "1",
+      "platform_commit": "5ea1b7e414b2e1f23fad849127e1bb72ded84b45",
+      "schema_version": 1,
+      "platform": "linux/arm64",
+      "image": "ghcr.io/prasanthece42/hello-guided@sha256:d053edfc4e1e6229f8491468e8e46e06c6012dce51ff6bec0f4e9e0cfa3e67d0",
+      "image_config_digest": "sha256:24a1b838a36433c50765b8596976b67a71b03a06e9db232f36449bb06f67621f",
+      "candidate_archive_sha256": "sha256:57b0d6f75883d8e7098932b435cffd5b3d00c5ac9bb1017b14b27c94f672d16c",
+      "digest_pull_smoke_test": "passed",
+      "evidence_sha256": {
+        "dependencies.json": "sha256:490f322a9475b4e11aee4826d780b359bff7b4ef842c18baeda0de6b556f1a6c",
+        "image.json": "sha256:691e89e353bf99a38febe6c827fb216c08c4535f1b304c4ce2a8d0722e883dd6",
+        "sbom.cdx.json": "sha256:32577c170ed194e56446872cbdddc5fd1b08617dcc9f2a041f8028d1f61c6888"
+      }
+    }
+  },
+  "bundle_sha256": "sha256:aa6d01091a949f73d587177c123bf4dfa62f4971913cbb634748ec58415a4872",
+  "provenance": "Unsigned workflow evidence; admission must verify GitHub source/run identity"
+}
