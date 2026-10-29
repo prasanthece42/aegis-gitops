@@ -1,0 +1,1 @@
+{"apiVersion":"v1","kind":"ResourceQuota","metadata":{"labels":{"aegis.io/app":"hello-portal","aegis.io/environment":"dev"},"name":"aegis-budget","namespace":"aegis-hello-portal-dev"},"spec":{"hard":{"count/deployments.apps":"1","count/serviceaccounts":"2","limits.cpu":"1500m","limits.memory":"768Mi","pods":"3","requests.cpu":"300m","requests.memory":"384Mi","services":"1"}}}
